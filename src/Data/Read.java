@@ -1,23 +1,26 @@
 package Data;
 
-
 public class Read {
-
+    static boolean isEmptyString(String string) {
+        return string == null || string.isEmpty();
+    }
     public static boolean validate(String text,StringBuilder error) {
-        if(text.isBlank()) {
+
+
+        if(isEmptyString(text)) {
             fillString(error,1);
             return true;
         }
         return false;
     }
     private static boolean checkTel(String text,StringBuilder error) { 	//Checkea que solo contenga numeros
-        if(text.isBlank()) {
+        if(isEmptyString(text)) {
             fillString(error,1);
             return true;
         }
         char[] s = text.toCharArray();
         for (char c: s){
-            if (!Character.isDigit(c)){
+            if (Character.isLetter(c)){
                 fillString(error,4);
                 return true;
             }
