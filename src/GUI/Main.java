@@ -1,15 +1,14 @@
 package GUI;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
+import Data.ButtonColumn;
+import Data.Player;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collections;
-
-import Data.ButtonColumn;
-import Data.Player;
 
 public class Main extends DefaultTableModel {
     public static JFrame frameMain;

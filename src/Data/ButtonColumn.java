@@ -118,25 +118,31 @@ public class ButtonColumn extends AbstractCellEditor
         editButton.setMnemonic(mnemonic);
     }
 
+    private void checkObjectValueToSetButtonText(Object value, JButton button) {
+
+        if (value == null)
+        {
+            button.setText( "" );
+            button.setIcon( null );
+        }
+        else if (value instanceof Icon)
+        {
+            button.setText( "" );
+            button.setIcon( (Icon)value );
+        }
+        else
+        {
+            button.setText( value.toString() );
+            button.setIcon( null );
+        }
+
+    }
+
     @Override
     public Component getTableCellEditorComponent(
             JTable table, Object value, boolean isSelected, int row, int column)
     {
-        if (value == null)
-        {
-            editButton.setText( "" );
-            editButton.setIcon( null );
-        }
-        else if (value instanceof Icon)
-        {
-            editButton.setText( "" );
-            editButton.setIcon( (Icon)value );
-        }
-        else
-        {
-            editButton.setText( value.toString() );
-            editButton.setIcon( null );
-        }
+        checkObjectValueToSetButtonText(value, editButton);
 
         this.editorValue = value;
         return editButton;
@@ -171,21 +177,7 @@ public class ButtonColumn extends AbstractCellEditor
             renderButton.setBorder( originalBorder );
         }
 
-        if (value == null)
-        {
-            renderButton.setText( "" );
-            renderButton.setIcon( null );
-        }
-        else if (value instanceof Icon)
-        {
-            renderButton.setText( "" );
-            renderButton.setIcon( (Icon)value );
-        }
-        else
-        {
-            renderButton.setText( value.toString() );
-            renderButton.setIcon( null );
-        }
+        checkObjectValueToSetButtonText(value, renderButton);
 
         return renderButton;
     }
