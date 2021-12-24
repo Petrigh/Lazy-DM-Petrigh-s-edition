@@ -25,14 +25,15 @@ public class Read {
         return false;
     }
     public static boolean validate(String t1,String t2,StringBuilder error) {
-        if(validate(t1,error)||checkTel(t2,error)) return true;
-        return false;
+        return validate(t1, error) || checkTel(t2, error);
     }
     static void fillString(StringBuilder zText,int i) {
         if(i==1) {
             zText.append ("Campo Vacio");
         }else if(i==4) {
             zText.append ("Iniciativa solo debe contener numeros");
+        }else if(i==2){
+            zText.append ("Jugador ya se encuentra guardado");
         }
     }
 }

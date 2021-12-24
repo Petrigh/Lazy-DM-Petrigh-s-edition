@@ -3,7 +3,6 @@ package GUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -21,17 +20,16 @@ public class EditarJugador {
     public static JTextField NameTfieldEdit;
     public static JTextField IniciativanTfieldEdit;
     private static JLabel labelErrorEdit;
-    private static JButton editarEdit;
     private static JFrame frame;
     private static Player player;
-
-    private static ArrayList<String> listedit = new ArrayList<>();
+    private static Integer ini;
 
 
     public static void create(JFrame frame) {
         //Nombre
         NameTfieldEdit = new JTextField();
         NameTfieldEdit.setBounds(140,77,250,20);
+        NameTfieldEdit.setText(player.getName());
         frame.getContentPane().add(NameTfieldEdit);
         JLabel labelNombreEdit = new JLabel("NOMBRE");
         labelNombreEdit.setBounds(65,80,70,14);
@@ -42,8 +40,28 @@ public class EditarJugador {
         labelIniciativaEdit.setBounds(65,120,70,14);
         frame.getContentPane().add(labelIniciativaEdit);
         IniciativanTfieldEdit = new JTextField();
-        IniciativanTfieldEdit.setBounds(140, 117, 250, 20);
+        IniciativanTfieldEdit.setBounds(140, 117, 50, 20);
+        IniciativanTfieldEdit.setText(String.valueOf(player.getInitiative()));
         frame.getContentPane().add(IniciativanTfieldEdit);
+
+        //Botones + -
+        JButton mas = new JButton("+");
+        mas.setBounds(255,120,45,20);
+        mas.setBackground(new Color(59, 89, 182));
+        mas.setForeground(Color.WHITE);
+        mas.setFocusPainted(false);
+        mas.setFont(new Font("Tahoma", Font.BOLD, 12));
+        mas.addActionListener(new incrementar());
+        frame.getContentPane().add(mas);
+
+        JButton menos = new JButton("-");
+        menos.setBounds(200,120,45,20);
+        menos.setBackground(new Color(59, 89, 182));
+        menos.setForeground(Color.WHITE);
+        menos.setFocusPainted(false);
+        menos.setFont(new Font("Tahoma", Font.BOLD, 12));
+        menos.addActionListener(new decrementar());
+        frame.getContentPane().add(menos);
 
         //Texto Error
         labelErrorEdit = new JLabel("", SwingConstants.CENTER);
@@ -51,7 +69,7 @@ public class EditarJugador {
         frame.getContentPane().add(labelErrorEdit);
 
         //Boton Editar
-        editarEdit = new JButton("EDITAR");
+        JButton editarEdit = new JButton("EDITAR");
         editarEdit.setBounds(180,150,90,23);
         editarEdit.setBackground(new Color(59, 89, 182));
         editarEdit.setForeground(Color.WHITE);
@@ -101,5 +119,22 @@ public class EditarJugador {
             }
             new javax.swing.Timer(delay, taskPerformer).start();
         }
+    }
+    private static class incrementar implements ActionListener{
+                public void actionPerformed(ActionEvent evt) {
+                    ini=Integer.valueOf(IniciativanTfieldEdit.getText());
+                    ini++;
+                    IniciativanTfieldEdit.setText(String.valueOf(ini));
+                    IniciativanTfieldEdit.update(IniciativanTfieldEdit.getGraphics());
+                }
+    }
+
+    private static class decrementar implements ActionListener{
+                public void actionPerformed(ActionEvent evt) {
+                    ini=Integer.valueOf(IniciativanTfieldEdit.getText());
+                    ini--;
+                    IniciativanTfieldEdit.setText(String.valueOf(ini));
+                    IniciativanTfieldEdit.update(IniciativanTfieldEdit.getGraphics());
+                }
     }
 }
