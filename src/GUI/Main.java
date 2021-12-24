@@ -31,8 +31,20 @@ public class Main extends DefaultTableModel {
 
         //Genero la tabla
         JTable tabla = new JTable();
+
+
+        //vamos a probar activar el drag and drop
+
+        tabla.setDragEnabled(true);
+        tabla.setDropMode(DropMode.INSERT_ROWS);
+        tabla.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabla.setTransferHandler(new TableRowTransferHandler(tabla));
+
+
         listPlayer.sort(Collections.reverseOrder());
-        DefaultTableModel model=new DefaultTableModel();
+        CustomTableModel model=new CustomTableModel();
+
+
         model.addColumn("NOMBRE");
         model.addColumn("INICIATIVA");
         model.addColumn("");
@@ -48,7 +60,7 @@ public class Main extends DefaultTableModel {
         tabla.getColumnModel().getColumn(0).setMaxWidth(120);
         tabla.getColumnModel().getColumn(1).setMaxWidth(30);
         tabla.getColumnModel().getColumn(2).setMaxWidth(95);
-        tabla.getColumnModel().getColumn(3).setMaxWidth(95);
+        tabla.getColumnModel().getColumn(3).setMaxWidth(120);
         tabla.getTableHeader().setReorderingAllowed(false);
         tabla.setTableHeader(null);
         JScrollPane scroll = new JScrollPane(tabla);

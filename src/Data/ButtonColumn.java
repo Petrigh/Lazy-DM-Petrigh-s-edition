@@ -33,18 +33,18 @@ import static GUI.Main.listPlayer;
 public class ButtonColumn extends AbstractCellEditor
         implements TableCellRenderer, TableCellEditor, ActionListener, MouseListener
 {
-    private JTable table;
-    private Action action;
+    private final JTable table;
+    private final Action action;
     private int mnemonic;
-    private Border originalBorder;
+    private final Border originalBorder;
     private Border focusBorder;
 
-    private JButton renderButton;
-    private JButton editButton;
+    private final JButton renderButton;
+    private final JButton editButton;
     private Object editorValue;
     private boolean isButtonColumnEditor;
 
-    private Action delete = new AbstractAction(){
+    private final Action delete = new AbstractAction(){
         public void actionPerformed(ActionEvent e) {
             int confirmWindow = JOptionPane.showConfirmDialog(null, "¿Desea eliminar a este jugador?", "Advertencia", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
             if(confirmWindow == 0) {
@@ -54,8 +54,7 @@ public class ButtonColumn extends AbstractCellEditor
                 p = new Player(table.getValueAt(row, 0).toString(), Integer.valueOf(table.getValueAt(row, 1).toString()));
                 for (Player play : listPlayer) {
                     if ((play.getName().equals(p.getName())) && (play.getInitiative().equals(p.getInitiative()))) {
-                        int index = listPlayer.indexOf(play);
-                        listPlayer.remove(index);
+                        listPlayer.remove(play);
                         break;
                     }
                 }
@@ -64,7 +63,7 @@ public class ButtonColumn extends AbstractCellEditor
             }
         }
     };
-    private Action edit = new AbstractAction(){
+    private final Action edit = new AbstractAction(){
         public void actionPerformed(ActionEvent e) {
             JTable table = (JTable)e.getSource();
             int row = table.getSelectedRow();
