@@ -3,13 +3,10 @@ package GUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.text.NumberFormat;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.*;
+import javax.swing.text.NumberFormatter;
 
 import Data.Player;
 import Data.Read;
@@ -18,7 +15,7 @@ import static GUI.Main.*;
 
 public class EditarJugador {
     public static JTextField NameTfieldEdit;
-    public static JTextField IniciativanTfieldEdit;
+    public static JFormattedTextField IniciativanTfieldEdit;
     private static JLabel labelErrorEdit;
     private static JFrame frame;
     private static Player player;
@@ -39,7 +36,15 @@ public class EditarJugador {
         JLabel labelIniciativaEdit = new JLabel("INICIATIVA");
         labelIniciativaEdit.setBounds(65,120,70,14);
         frame.getContentPane().add(labelIniciativaEdit);
-        IniciativanTfieldEdit = new JTextField();
+        NumberFormat format = NumberFormat.getInstance();
+        NumberFormatter formatter = new NumberFormatter(format);
+        formatter.setValueClass(Integer.class);
+        formatter.setMinimum(Integer.MIN_VALUE);
+        formatter.setMaximum(Integer.MAX_VALUE);
+        formatter.setAllowsInvalid(false);
+        formatter.setCommitsOnValidEdit(true);
+
+        IniciativanTfieldEdit = new JFormattedTextField(formatter);
         IniciativanTfieldEdit.setBounds(140, 117, 50, 20);
         IniciativanTfieldEdit.setText(String.valueOf(player.getInitiative()));
         frame.getContentPane().add(IniciativanTfieldEdit);
@@ -92,32 +97,29 @@ public class EditarJugador {
     private static class handler implements ActionListener{
 
         public void actionPerformed(ActionEvent e) {
-            int delay = 1000; //milliseconds
-            //      error solo sea vea 3 segundos y desaparezca
-            ActionListener taskPerformer = evt -> {
-                if(labelErrorEdit.getText().equals("Guardando...")) {
-                    frame.dispose();
-                    frameMain.dispose();
-                    Main.createWindow();
-                }
-                labelErrorEdit.setText("");
-            };													 	//
+            int delay = 3000;//ms
+            ActionListener taskPerformer = evt -> labelErrorEdit.setText("");
+            labelErrorEdit.setText("Guardando...");
             StringBuilder error = new StringBuilder();
-            if(Read.validate(NameTfieldEdit.getText(),IniciativanTfieldEdit.getText(),error)){
+            Read read = new Read();
+            if(read.validate(NameTfieldEdit.getText(),IniciativanTfieldEdit.getText(),error)) //imprime error
                 labelErrorEdit.setText(error.toString());
-            }else {
-                for (Player play : listPlayer) {
+            new Timer(delay, taskPerformer).start(); //saca el error despues de 'delay' milliseconds
+
+            if(labelErrorEdit.getText().equals("Guardando...")) {
+                for (Player play : listPlayer) { //busca el jugador y lo edita
                     if ((play.getName().equals(player.getName())) && (play.getInitiative().equals(player.getInitiative()))) {
                         int index = listPlayer.indexOf(play);
                         Player aux;
                         aux = new Player(NameTfieldEdit.getText(), Integer.valueOf(IniciativanTfieldEdit.getText()));
                         listPlayer.set(index,aux);
-                        labelErrorEdit.setText("Guardando...");
                         break;
                     }
                 }
+                frame.dispose();
+                frameMain.dispose();
+                Main.createWindow();
             }
-            new javax.swing.Timer(delay, taskPerformer).start();
         }
     }
     private static class incrementar implements ActionListener{

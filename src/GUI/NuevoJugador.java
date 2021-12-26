@@ -4,15 +4,17 @@ import Data.Player;
 import Data.Read;
 
 import javax.swing.*;
+import javax.swing.text.NumberFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 
 import static GUI.Main.*;
 
 public class NuevoJugador extends Frame {
     public static JTextField tfieldName;
-    public static JTextField tfieldIniciativa;
+    public static JFormattedTextField tfieldIniciativa;
     private static JLabel labelError;
     private static JFrame frame;
     private static Integer ini;
@@ -26,14 +28,23 @@ public class NuevoJugador extends Frame {
         frame.getContentPane().add(labelName);
 
         //Inciativa
+
+        NumberFormat format = NumberFormat.getInstance();
+        NumberFormatter formatter = new NumberFormatter(format);
+        formatter.setValueClass(Integer.class);
+        formatter.setMinimum(Integer.MIN_VALUE);
+        formatter.setMaximum(Integer.MAX_VALUE);
+        formatter.setAllowsInvalid(false);
+        formatter.setCommitsOnValidEdit(true);
+        tfieldIniciativa = new JFormattedTextField(formatter);
+        tfieldIniciativa.setBounds(140, 117, 50, 20);
+        tfieldIniciativa.setText("0");
+        frame.getContentPane().add(tfieldIniciativa);
+
         JLabel labelIniciativa = new JLabel("INICIATIVA");
         labelIniciativa.setBounds(65,120,70,14);
         frame.getContentPane().add(labelIniciativa);
-        tfieldIniciativa = new JTextField();
-        tfieldIniciativa.setBounds(140, 120, 50, 20);
-        ini=0;
-        tfieldIniciativa.setText(ini.toString());
-        frame.getContentPane().add(tfieldIniciativa);
+
         //Botones + -
         JButton mas = new JButton("+");
         mas.setBounds(255,120,45,20);
@@ -81,25 +92,23 @@ public class NuevoJugador extends Frame {
     private static class handler implements ActionListener{
 
         public void actionPerformed(ActionEvent e) {
-            int delay = 1000; //milliseconds
-            ActionListener taskPerformer = evt -> {
-                if(labelError.getText().equals("Guardando...")) {
-                    frame.dispose();
-                    frameMain.dispose();
-                    Main.createWindow();
-                }
-                labelError.setText("");
-            };
+            int delay = 3000;//ms
+            ActionListener taskPerformer = evt -> labelError.setText("");
+            labelError.setText("Guardando...");
             StringBuilder error = new StringBuilder();
-            if(Read.validate(tfieldName.getText(),tfieldIniciativa.getText(),error)){
+            Read read = new Read();
+            if(read.validate(tfieldName.getText(),tfieldIniciativa.getText(),error)) //imprime error
                 labelError.setText(error.toString());
-            }else {
+            new Timer(delay, taskPerformer).start(); //saca el error despues de 'delay' milliseconds
+
+            if(labelError.getText().equals("Guardando...")) {
                 Player p;
                 p = new Player(tfieldName.getText(), Integer.valueOf(tfieldIniciativa.getText()));
                 listPlayer.add(p);
-                labelError.setText("Guardando...");
+                frame.dispose();
+                frameMain.dispose();
+                Main.createWindow();
             }
-            new Timer(delay, taskPerformer).start();
         }
     }
 

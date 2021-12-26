@@ -5,6 +5,8 @@ import Data.Player;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,13 +15,13 @@ public class Main  {
     public static JFrame frameMain;
     public static ArrayList<Player> listPlayer = new ArrayList<>();
 
-    public static void create(JFrame frame) {
+    private static void create(JFrame frame) {
 
         //Genero Botones
 
         //Boton Nuevo
         JButton nuevo = new JButton("+ NUEVO");
-        nuevo.setBounds(147,20,100,23);
+        nuevo.setBounds(47,20,100,23);
         nuevo.setBackground(new Color(59, 89, 182));
         nuevo.setForeground(Color.WHITE);
         nuevo.setFocusPainted(false);
@@ -27,6 +29,16 @@ public class Main  {
         nuevo.addActionListener(e -> NuevoJugador.createWindow());
         frame.getRootPane().setDefaultButton(nuevo);
         frame.getContentPane().add(nuevo);
+
+        //Boton Reordenar
+        JButton order = new JButton("REORDENAR");
+        order.setBounds(220,20,120,23);
+        order.setBackground(new Color(59, 89, 182));
+        order.setForeground(Color.WHITE);
+        order.setFocusPainted(false);
+        order.setFont(new Font("Tahoma", Font.BOLD, 12));
+        order.addActionListener(new reordenar());
+        frame.getContentPane().add(order);
 
         //Genero la tabla
         JTable tabla = new JTable();
@@ -83,5 +95,12 @@ public class Main  {
     }
     public static void main(String[] args) {
         createWindow();
+    }
+
+    private static class reordenar implements ActionListener {
+        public void actionPerformed(ActionEvent evt) {
+            frameMain.dispose();
+            createWindow();
+        }
     }
 }

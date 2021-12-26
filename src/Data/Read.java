@@ -4,10 +4,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Read {
-    static boolean isEmptyString(String string) {
+    private boolean isEmptyString(String string) {
         return string == null || string.isEmpty();
     }
-    public static boolean validate(String text, StringBuilder error) {
+    private boolean validate(String text, StringBuilder error) {
 
         if(isEmptyString(text)) {
             fillString(error,1);
@@ -15,7 +15,7 @@ public class Read {
         }
         return false;
     }
-    private static boolean checkTel(String text,StringBuilder error) { 	//Checkea que solo contenga numeros
+    private boolean checkTel(String text,StringBuilder error) { 	//Checkea que solo contenga numeros
         if(isEmptyString(text)) {
             fillString(error,1);
             return true;
@@ -30,7 +30,7 @@ public class Read {
         return false;
     }
 
-    public static boolean checkForSpecialChar(String text, StringBuilder error) {
+    private boolean checkForSpecialChar(String text, StringBuilder error) {
 
         /*
             Esto funciona solo si el '-' esta detras del numero
@@ -38,6 +38,8 @@ public class Read {
             **
             Estoy un poco confundido de porque hiciste una clase solo con
             metodos estaticos, pero ¿Quien soy para juzgar?
+
+            El codigo fue robado de un proyecto que hice antes, asi que no lo cuestione, ahi lo arregle
         */
 
 
@@ -55,10 +57,10 @@ public class Read {
     }
 
 
-    public static boolean validate(String t1, String t2, StringBuilder error) {
+    public boolean validate(String t1, String t2, StringBuilder error) {
         return validate(t1, error) || checkTel(t2, error) || checkForSpecialChar(t2, error);
     }
-    static void fillString(StringBuilder zText, int i) {
+    private void fillString(StringBuilder zText, int i) {
         if(i==1) {
             zText.append ("Campo Vacio");
         }else if(i==4) {
