@@ -4,13 +4,12 @@ import Data.ButtonColumn;
 import Data.Player;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Main extends DefaultTableModel {
+public class Main  {
     public static JFrame frameMain;
     public static ArrayList<Player> listPlayer = new ArrayList<>();
 
