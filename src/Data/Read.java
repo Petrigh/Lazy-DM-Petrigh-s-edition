@@ -48,7 +48,7 @@ public class Read {
         Matcher matcher = regex.matcher(text);
 
         if(matcher.find()) {
-            //error 2 porque no son numeros.
+            //error 4 porque no son numeros.
             fillString(error, 4);
             return true;
         }

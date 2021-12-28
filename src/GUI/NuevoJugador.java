@@ -18,13 +18,21 @@ public class NuevoJugador extends Frame {
     private static JLabel labelError;
     private static JFrame frame;
     private static Integer ini;
+
     public static void create(JFrame frame) {
         //Nombre
         tfieldName = new JTextField();
         tfieldName.setBounds(140,77,250,20);
+
         frame.getContentPane().add(tfieldName);
+
+
         JLabel labelName = new JLabel("NOMBRE");
+
         labelName.setBounds(65,80,70,14);
+
+
+
         frame.getContentPane().add(labelName);
 
         //Inciativa

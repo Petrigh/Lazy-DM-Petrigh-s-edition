@@ -26,6 +26,9 @@ public class Main  {
         nuevo.setForeground(Color.WHITE);
         nuevo.setFocusPainted(false);
         nuevo.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+
+
         nuevo.addActionListener(e -> NuevoJugador.createWindow());
         frame.getRootPane().setDefaultButton(nuevo);
         frame.getContentPane().add(nuevo);

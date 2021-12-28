@@ -1,6 +1,6 @@
 package Data;
 
-import GUI.EditarJugador;
+import GUI.EditarJugadorForm;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -67,7 +67,9 @@ public class ButtonColumn extends AbstractCellEditor
         public void actionPerformed(ActionEvent e) {
             JTable table = (JTable)e.getSource();
             int row = table.getSelectedRow();
-            EditarJugador.createWindow(table.getValueAt(row, 0).toString(),Integer.valueOf(table.getValueAt(row, 1).toString()));
+            //EditarJugador.createWindow(table.getValueAt(row, 0).toString(),Integer.valueOf(table.getValueAt(row, 1).toString()));
+            EditarJugadorForm editar = new EditarJugadorForm(table.getValueAt(row, 0).toString(),Integer.valueOf(table.getValueAt(row, 1).toString()));
+            editar.createWindow();
         }
     };
 
