@@ -68,6 +68,7 @@ public class ButtonColumn extends AbstractCellEditor
             JTable table = (JTable)e.getSource();
             int row = table.getSelectedRow();
             EditarJugador.createWindow(table.getValueAt(row, 0).toString(),Integer.valueOf(table.getValueAt(row, 1).toString()));
+            editButton.setEnabled(false);
         }
     };
 
