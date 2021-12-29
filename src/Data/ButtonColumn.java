@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import static GUI.Main.listPlayer;
+import static GUI.LazyDM.listPlayer;
 
 /**
  *  The ButtonColumn class provides a renderer and an editor that looks like a

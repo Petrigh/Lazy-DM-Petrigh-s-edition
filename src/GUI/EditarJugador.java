@@ -13,7 +13,7 @@ import javax.swing.text.NumberFormatter;
 import Data.Player;
 import Data.Read;
 
-import static GUI.Main.*;
+import static GUI.LazyDM.*;
 
 public class EditarJugador {
     public static JTextField NameTfieldEdit;
@@ -98,7 +98,7 @@ public class EditarJugador {
             {
                 frame.dispose();
                 frameMain.dispose();
-                Main.createWindow();
+                LazyDM.createWindow();
             }
         });
         create(frame);
@@ -130,7 +130,7 @@ public class EditarJugador {
                 }
                 frame.dispose();
                 frameMain.dispose();
-                Main.createWindow();
+                LazyDM.createWindow();
             }
         }
     }

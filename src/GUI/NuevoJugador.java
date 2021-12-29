@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 
-import static GUI.Main.*;
+import static GUI.LazyDM.*;
 
 public class NuevoJugador extends Frame {
     public static JTextField tfieldName;
@@ -108,7 +108,7 @@ public class NuevoJugador extends Frame {
                 listPlayer.add(p);
                 frame.dispose();
                 frameMain.dispose();
-                Main.createWindow();
+                LazyDM.createWindow();
             }
         }
     }
