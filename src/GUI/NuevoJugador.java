@@ -30,6 +30,7 @@ public class NuevoJugador extends Frame {
         //Inciativa
 
         NumberFormat format = NumberFormat.getInstance();
+        format.setGroupingUsed(false);
         NumberFormatter formatter = new NumberFormatter(format);
         formatter.setValueClass(Integer.class);
         formatter.setMinimum(Integer.MIN_VALUE);
@@ -116,7 +117,7 @@ public class NuevoJugador extends Frame {
                 public void actionPerformed(ActionEvent evt) {
                     ini=Integer.valueOf(tfieldIniciativa.getText());
                     ini++;
-                    tfieldIniciativa.setText(String.valueOf(ini));
+                    tfieldIniciativa.setValue(ini);
                     tfieldIniciativa.update(tfieldIniciativa.getGraphics());
                 }
     }
@@ -124,7 +125,7 @@ public class NuevoJugador extends Frame {
                 public void actionPerformed(ActionEvent evt) {
                     ini=Integer.valueOf(tfieldIniciativa.getText());
                     ini--;
-                    tfieldIniciativa.setText(String.valueOf(ini));
+                    tfieldIniciativa.setValue(ini);
                     tfieldIniciativa.update(tfieldIniciativa.getGraphics());
                 }
     }

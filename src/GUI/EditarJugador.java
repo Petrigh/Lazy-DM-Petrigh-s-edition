@@ -3,6 +3,8 @@ package GUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.NumberFormat;
 
 import javax.swing.*;
@@ -37,6 +39,7 @@ public class EditarJugador {
         labelIniciativaEdit.setBounds(65,120,70,14);
         frame.getContentPane().add(labelIniciativaEdit);
         NumberFormat format = NumberFormat.getInstance();
+        format.setGroupingUsed(false);
         NumberFormatter formatter = new NumberFormatter(format);
         formatter.setValueClass(Integer.class);
         formatter.setMinimum(Integer.MIN_VALUE);
@@ -89,6 +92,15 @@ public class EditarJugador {
         frame = new JFrame("LAZY DM - EDITAR JUGADOR");
         frame.setBounds(100, 100, 450, 250);
         frame.getContentPane().setLayout(null);
+        frame.addWindowListener(new WindowAdapter()
+        {
+            public void windowClosing(WindowEvent e)
+            {
+                frame.dispose();
+                frameMain.dispose();
+                Main.createWindow();
+            }
+        });
         create(frame);
         frame.setResizable(false);
         frame.setVisible(true);
@@ -126,7 +138,7 @@ public class EditarJugador {
                 public void actionPerformed(ActionEvent evt) {
                     ini=Integer.valueOf(IniciativanTfieldEdit.getText());
                     ini++;
-                    IniciativanTfieldEdit.setText(String.valueOf(ini));
+                    IniciativanTfieldEdit.setValue(ini);
                     IniciativanTfieldEdit.update(IniciativanTfieldEdit.getGraphics());
                 }
     }
@@ -135,7 +147,7 @@ public class EditarJugador {
                 public void actionPerformed(ActionEvent evt) {
                     ini=Integer.valueOf(IniciativanTfieldEdit.getText());
                     ini--;
-                    IniciativanTfieldEdit.setText(String.valueOf(ini));
+                    IniciativanTfieldEdit.setValue(ini);
                     IniciativanTfieldEdit.update(IniciativanTfieldEdit.getGraphics());
                 }
     }
