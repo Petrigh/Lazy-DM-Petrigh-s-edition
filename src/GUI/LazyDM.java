@@ -11,7 +11,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Main  {
+public class LazyDM {
     public static JFrame frameMain;
     public static ArrayList<Player> listPlayer = new ArrayList<>();
 
@@ -93,10 +93,6 @@ public class Main  {
         frameMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameMain.setVisible(true);
     }
-    public static void main(String[] args) {
-        createWindow();
-    }
-
     private static class reordenar implements ActionListener {
         public void actionPerformed(ActionEvent evt) {
             frameMain.dispose();
