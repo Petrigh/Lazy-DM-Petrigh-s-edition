@@ -14,19 +14,20 @@ import java.util.Collections;
 public class LazyDM {
     public static JFrame frameMain;
     public static ArrayList<Player> listPlayer = new ArrayList<>();
+    private static JButton nuevo;
 
     private static void create(JFrame frame) {
 
         //Genero Botones
 
         //Boton Nuevo
-        JButton nuevo = new JButton("+ NUEVO");
+        nuevo = new JButton("+ NUEVO");
         nuevo.setBounds(47,20,100,23);
         nuevo.setBackground(new Color(59, 89, 182));
         nuevo.setForeground(Color.WHITE);
         nuevo.setFocusPainted(false);
         nuevo.setFont(new Font("Tahoma", Font.BOLD, 12));
-        nuevo.addActionListener(e -> NuevoJugador.createWindow());
+        nuevo.addActionListener(new abrirnuevo());
         frame.getRootPane().setDefaultButton(nuevo);
         frame.getContentPane().add(nuevo);
 
@@ -93,10 +94,19 @@ public class LazyDM {
         frameMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameMain.setVisible(true);
     }
+    private static class abrirnuevo implements ActionListener {
+        public void actionPerformed(ActionEvent evt) {
+            NuevoJugador.createWindow();
+            nuevo.setEnabled(false);
+        }
+    }
     private static class reordenar implements ActionListener {
         public void actionPerformed(ActionEvent evt) {
             frameMain.dispose();
             createWindow();
         }
+    }
+    public static void activate(){
+        nuevo.setEnabled(true);
     }
 }

@@ -8,6 +8,8 @@ import javax.swing.text.NumberFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.NumberFormat;
 
 import static GUI.LazyDM.*;
@@ -85,6 +87,16 @@ public class NuevoJugador extends Frame {
         frame = new JFrame("LAZY DM - NUEVO JUGADOR");
         frame.setBounds(100, 100, 450, 250);
         frame.getContentPane().setLayout(null);
+        frame.addWindowListener(new WindowAdapter()
+        {
+            public void windowClosing(WindowEvent e)
+            {
+                frame.dispose();
+                frameMain.dispose();
+                LazyDM.activate();
+                LazyDM.createWindow();
+            }
+        });
         create(frame);
         frame.setResizable(false);
         frame.setVisible(true);
@@ -108,6 +120,7 @@ public class NuevoJugador extends Frame {
                 listPlayer.add(p);
                 frame.dispose();
                 frameMain.dispose();
+                LazyDM.activate();
                 LazyDM.createWindow();
             }
         }
